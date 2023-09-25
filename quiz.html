@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="shortcut icon" href="img/quiz_favicon1.png" type="image/x-icon">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>Quiz App</title>
+</head>
+<body>
+  <div class="bg-gradient-to-r from-indigo-500 via-red-500 to-green-500 min-h-screen flex flex-col items-center justify-center opacity-80">
+    <div class="container mx-auto flex justify-center my-5 rounded-lg">
+      <div class="w-full max-w-md p-4 bg-gray-900 rounded-lg shadow-lg bg-opacity-40">
+        <div class="flex justify-center">
+          <img src="img/brain_logo.png" alt="" width="50">
+        </div>
+        <h1 class="text-xl text-center font-bold text-gray-300 mb-8">Quiz Application</h1>
+        <div class="space-y-4">
+       
+          <div id="questions-container">
+            <!----------
+              Question
+            ------------>
+          </div>
+          <div class="text-center">
+            <button onclick="checkAnswers()" class="bg-indigo-500 text-white py-1 px-4 rounded-full hover:bg-blue-600 transition duration-200 ease-in-out">SUBMIT</button>
+          </div>
+          <div id="score" class="text-lg text-darkslategray text-center bg-indigo-100 rounded bg-opacity-40"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const Quiz = [
+      {
+        question: "10+15=?",
+        option: [
+          { text: "15", isCorrect: false },
+          { text: "18", isCorrect: false },
+          { text: "25", isCorrect: true },
+          { text: "88", isCorrect: false },
+        ],
+      },
+      
+      {
+        question: "100/100 = ?",
+        option: [
+          { text: "1", isCorrect: true },
+          { text: "100", isCorrect: false },
+          { text: "50", isCorrect: false },
+          { text: "1000", isCorrect: false },
+        ],
+      },
+      {
+        question: "10 - 15 = ?",
+        option: [
+          { text: "50", isCorrect: false },
+          { text: "75", isCorrect: false },
+          { text: "25", isCorrect: false },
+          { text: "- 5", isCorrect: true },
+        ],
+      },
+
+      {
+        question: "100-99=?",
+        option: [
+          { text: "15", isCorrect: false },
+          { text: "1", isCorrect: true },
+          { text: "25", isCorrect: false },
+          { text: "88", isCorrect: false },
+        ],
+      },
+      {
+        question: "99-99=?",
+        option: [
+          { text: "51", isCorrect: false },
+          { text: "13", isCorrect: false },
+          { text: "74", isCorrect: false },
+          { text: "0", isCorrect: true },
+        ],
+      },
+      {
+        question: "10+15=?",
+        option: [
+          { text: "15", isCorrect: false },
+          { text: "18", isCorrect: false },
+          { text: "25", isCorrect: true },
+          { text: "88", isCorrect: false },
+        ],
+      },
+      
+      {
+        question: "100/100 = ?",
+        option: [
+          { text: "1", isCorrect: true },
+          { text: "100", isCorrect: false },
+          { text: "50", isCorrect: false },
+          { text: "1000", isCorrect: false },
+        ],
+      },
+      {
+        question: "10 - 15 = ?",
+        option: [
+          { text: "50", isCorrect: false },
+          { text: "75", isCorrect: false },
+          { text: "25", isCorrect: false },
+          { text: "- 5", isCorrect: true },
+        ],
+      },
+
+      {
+        question: "100-99=?",
+        option: [
+          { text: "15", isCorrect: false },
+          { text: "1", isCorrect: true },
+          { text: "25", isCorrect: false },
+          { text: "88", isCorrect: false },
+        ],
+      },
+      {
+        question: "99-99=?",
+        option: [
+          { text: "51", isCorrect: false },
+          { text: "13", isCorrect: false },
+          { text: "74", isCorrect: false },
+          { text: "0", isCorrect: true },
+        ],
+      },
+     
+    
+    ];
+
+    let score = 0;
+
+    function getQuestions() {
+      const questionsContainer = document.getElementById("questions-container");
+
+      Quiz.forEach((questionObj, index) => {
+        const questionDiv = document.createElement("div");
+        questionDiv.className = "question";
+        questionsContainer.appendChild(questionDiv);
+
+        const questionParagraph = document.createElement("p");
+        questionParagraph.textContent = `Question (${index + 1}) ${questionObj.question}`;
+        questionDiv.appendChild(questionParagraph);
+
+        questionObj.option.forEach((option, optionIndex) => {
+          const optionDiv = document.createElement("div");
+          optionDiv.className = "option";
+          questionDiv.appendChild(optionDiv);
+
+          const optionInput = document.createElement("input");
+          optionInput.type = "radio";
+          optionInput.name = `answer-${index}`;
+          optionInput.value = optionIndex;
+          optionDiv.appendChild(optionInput);
+
+          const optionLabel = document.createElement("label");
+          optionLabel.textContent = option.text;
+          optionDiv.appendChild(optionLabel);
+        });
+      });
+    }
+
+    getQuestions();
+
+    function checkAnswers() {
+      let correctAnswers = 0;
+
+      Quiz.forEach((questionObj, index) => {
+        const selectedOption = document.querySelector(`input[name="answer-${index}"]:checked`);
+
+        if (selectedOption) {
+          const selectedAnswerIndex = parseInt(selectedOption.value);
+
+          if (questionObj.option[selectedAnswerIndex].isCorrect) {
+            correctAnswers++;
+          }
+        }
+      });
+
+      const scoreDiv = document.getElementById("score");
+      scoreDiv.textContent = `Your score: ${((correctAnswers / Quiz.length) * 100).toFixed(2)}%`;
+    }
+  </script>
+</body>
+</html>

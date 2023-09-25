@@ -1,0 +1,31 @@
+.question{
+  background: #696969b9;
+  box-shadow: 0 1px 3px #0000001f, 0 1px 2px #0000003d;
+  margin: 10px;
+  padding: 5px;
+  border-radius: 10px;
+}
+.question p{
+  background: #dfdfdf;
+  margin-bottom: 5px;
+  padding: 5px;
+  border-radius: 6px;
+
+}
+.option{
+  background: #f8f8f893;
+  padding: 5px;
+  margin-top: 5px;
+  border-radius: 6px;
+  border: 1px solid #b39bf5;
+}
+.option label{
+  margin-left:10px ;
+}
+h1{
+  font-family: cursive;
+  color: #606061;
+}
+#score{
+  font-family: cursive;
+}
